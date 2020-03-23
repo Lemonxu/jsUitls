@@ -11,6 +11,7 @@ const createEnum = (definition) => {
     const keyToValueMap = {}; //根据key设置value
     const valueToLabelMap = {}; //根据value设置Key
     const keyToParamsMap = {}; //根据key获取所有的信息
+    const allList = []; //所有key的值变成列表
 
     for (const enumName of Object.keys(definition)) {
         const [value, label, style, params = {}] = definition[enumName];
@@ -24,9 +25,13 @@ const createEnum = (definition) => {
         delete params.value;
         delete params.style;
         keyToParamsMap[enumName] = {value, label, style, ...params}
+        allList.push(keyToParamsMap[enumName]); //列表
     }
     return {
         ...keyToParamsMap,
+        getAllList() {
+            return allList;
+        },
         // 获取
         getLabel(enumName) {
             return definition[enumName] && definition[enumName][1] || ""
