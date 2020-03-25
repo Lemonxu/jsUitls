@@ -29,16 +29,19 @@ const createEnum = (definition) => {
     }
     return {
         ...keyToParamsMap,
+        // 获取值相关列表
         getAllList() {
             return allList;
         },
-        // 获取
+        // 根据状态Key获取名称
         getLabel(enumName) {
             return definition[enumName] && definition[enumName][1] || ""
         },
+        // 根据状态的值获取名称
         getLabelFromValue(value) {
             return valueToLabelMap[value] || ""
         },
+        // 根据状态的Key获取样式
         getStyleFromKey(enumName) {
             return keyToParamsMap[enumName] || {value: null, label: null, style: null}
         }
